@@ -12,12 +12,12 @@ args <- commandArgs(trailingOnly=TRUE)
 if (length(args)==0){
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
 } else if (length(args)==1){
-  args[2] = "params.csv"
+  args[2] = "Input/params.csv"
 }
 
 load(args[1])
 par <- read.csv(args[2], header=TRUE)
-load("Init_B.rda")
+load("Input/Init_B.rda")
 
 no.webs <- length(webs)
 no.species <- unlist(lapply(webs, FUN = nrow))
