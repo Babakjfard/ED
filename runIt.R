@@ -2,7 +2,6 @@
 # Start the clock!
 #require("RevoUtilsMath")
 #setMKLthreads(4)
-ptm <- proc.time()
 library(deSolve)
 
 source("analysis.R")
@@ -12,12 +11,12 @@ args <- commandArgs(trailingOnly=TRUE)
 if (length(args)==0){
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
 } else if (length(args)==1){
-  args[2] = "Input/params.csv"
+  args[2] = "params.csv"
 }
 
 load(args[1])
 par <- read.csv(args[2], header=TRUE)
-load("Input/Init_B.rda")
+load("Init_B.rda")
 
 no.webs <- length(webs)
 no.species <- unlist(lapply(webs, FUN = nrow))
@@ -77,6 +76,6 @@ for (i in 1:length(d)){
     abundances[,,i] <- Reduce('+', temp.abund)/length(temp.abund)
     
 }
-theFile <- paste0("Output/out_",args[1])
+fileName <- strsplit(args[1],"/")[[1]][2]
+theFile <- paste0("Output/out_",fileName)
 save(abundances, file = theFile) 
-the.time <- proc.time() - ptm
