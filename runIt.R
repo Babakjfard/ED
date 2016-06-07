@@ -14,7 +14,7 @@ if (length(args)==0){
   args[2] = "params.csv"
 }
 
-load(args[1])
+load(paste0("Input/",args[1]))
 par <- read.csv(args[2], header=TRUE)
 load("Init_B.rda")
 

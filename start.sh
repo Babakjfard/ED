@@ -1,7 +1,7 @@
 #!/bin/bash
 $path="Input/"
-for i in $(ls Intput)
+for i in $(ls Input)
 do
    file=$path$i
-   Rscript runIt.R $file params.csv
+   time Rscript runIt.R $file params.csv
 done
