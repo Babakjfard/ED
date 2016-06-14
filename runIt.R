@@ -76,6 +76,6 @@ for (i in 1:length(d)){
     abundances[,,i] <- Reduce('+', temp.abund)/length(temp.abund)
     
 }
-fileName <- strsplit(args[1],"/")[[1]][2]
+fileName <- args[1]
 theFile <- paste0("Output/out_",fileName)
 save(abundances, file = theFile) 
