@@ -17,6 +17,7 @@ if (length(args)==0){
 load(paste0("Input/",args[1]))
 par <- read.csv(args[2], header=TRUE)
 load("Init_B.rda")
+print(args[1])
 
 no.webs <- length(webs)
 no.species <- unlist(lapply(webs, FUN = nrow))
@@ -56,7 +57,7 @@ parms <- list(webs=webs, a=a, h=h, basals=basals, no.species=no.species, ff=ff, 
 
 #------------------------------------------------------------------------------------------------------------
 
-max.time =1000 
+max.time =3000 
 nreps <- 3
 # putting all inputs into vector
 initials <- c(init)
