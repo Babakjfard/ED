@@ -6,13 +6,15 @@ library(deSolve)
 
 source("analysis.R")
 
-args <- commandArgs(trailingOnly=TRUE)
+args <- commandArgs()
+#args <- commandArgs(trailingOnly=TRUE)
 # test if there is at least one argument: if not, return an error
 if (length(args)==0){
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
 } else if (length(args)==1){
   args[2] = "params.csv"
 }
+
 
 load(paste0("Input/",args[1]))
 par <- read.csv(args[2], header=TRUE)
@@ -27,7 +29,7 @@ init <- B[1:max.species, 1:no.webs]
 #parameters of Yidsiz model
 a<- matrix(nrow = max.species, ncol=max.species, par$a)  #attack rate
 h <- matrix(nrow = max.species, ncol=max.species, par$h)    #handling time
-d <- seq(from=10e-7, to=.5, length=10)  #d<- c(0)    dispersal rates
+d <- c(1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 0.001, .01, .1, .4, .5)    #dispersal rates
 m <- rep(.3,max.species) # m <- runif(max.species)*.4            #mortality. same 
 
 ### The required parameters for mechanistic competition

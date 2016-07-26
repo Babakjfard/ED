@@ -55,9 +55,9 @@ for (i in 1:10){
     abunds[[i]] <- abundances
 }
 #===========================
-p <- 4
-S <- 20
-theFile <- "differentH_S5P20_7.pdf"
+p <- 2
+S <- 5
+theFile <- "07_11_abundances.pdf"
 pdf(file = theFile)
 
 for (k in 1:dim(abunds)[3]){
@@ -227,18 +227,37 @@ for (theAdjs in thefiles) {
   print(test2)
 }
 
-#================== 6/7/2016
-# to average different variations of one condition into one file
-theFiles <- list.files(path = "./Output")
+#================== 6/15/2016
+#for statistics of the model
+for (i in 1:length(final.abundances)){
+  abundance <- final.abundances[[i]]
+  thename <- names(final.abundances)[i]
+  no.species <- strtoi(substr(thename, start = regexpr("S", thename)[1]+1, stop = regexpr("C", thename)[1]-1))
+  connectance <- substr(thename, start = regexpr("C", thename)[1]+1, stop = regexpr("n", thename)[1]-1)
+  no.webs <- strtoi(substr(thename, start = regexpr("P", thename)[1]+1, stop = regexpr("r", thename)[1]-2))
 
-# put them into collections, so must end up having 5x5x4 = 100 different cases
-# 5 no.species <- {5, 10, 20, 50, 100}, 5 connectances <-{0.05, 0.1, 0.18, 0.25, 0.3}, 4 patch.numbers <- {2,  5, 15, 50}
-S <-  as.character(c(5, 10, 20, 50, 100))  # No. of species
-C <- c("05", "1", "18", "25", "3")   # connectance values
-P <- as.character(c(2, 5, 15, 50))   # number of patches
-combinations <- expand.grid(S, C, P)
+  reg.map <- to.regional(no.species, no.webs)
+  reg.stab <- sapply(1:dim(abundance)[3], function(i) reg.stability(abundance[,,i], reg.map))
+  loc.stab <- sapply(1:dim(abundance)[3], function(i) loc.stability(abundance[,,i], reg.map))
 
-grep(paste0("S",S,"C",C,"n_V[[:digit:]]+_P",P,".rda"), theFiles, value = TRUE)
+  #######!!!!!!!!!!!!!!!!!!The following two lines need improvements
+  intra.synch <-  sapply(1:dim(abundance)[3], function(i) intra.sync(abundance[,,i], reg.map)) 
+  inter.synch <-  sapply(1:dim(abundance)[3], function(i) inter.sync(abundance[,,1], reg.map))
+}
 
-# each collections contains arrays with equal sizes (not more than 30 arrays in each collection)
-# the array of mean values for each collection is calculated!!
+#=======================7/12
+f <- list.files("Output")
+theFile <- "07_19_Reg_stabiilities.pdf"
+pdf(file = theFile)
+for (fl in f){
+  load(paste0("Output/",fl))
+  specs <- model.spec.by.name(fl)
+  reg.map <- to.regional(no.species = strtoi(specs[1]), no.webs = strtoi(specs[2]))
+  reg.stab <- sapply(1:dim(abundances)[3], function(i) reg.stability(abundances = abundances[2500:3001,2:dim(abundances)[2],i],reg.map = reg.map))
+  reg.stab <- t(reg.stab)
+  d <- c(1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 0.001, .01, .1, .4, .5)    #dispersal rates
+  matplot(d, reg.stab, t="l", lty=1, cex = d, xlab = "d", ylab="Regional Stability")
+  title(main = paste0("Species=",specs[1], ", Patches=", specs[2], " Connectance=",specs[3]))
+}
+dev.off()
+
