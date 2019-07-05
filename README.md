@@ -9,5 +9,6 @@ growth rate of predator:      ![Second equation](https://latex.codecogs.com/gif.
 
 The system also includes basal species which compete for one resource. The competition is modeled by mechanistic model as in equations (3) and (4). 
 
-![3rd eq](https://latex.codecogs.com/gif.latex?%28dN_i%29/dt%3DN_i%5C%20%28%5Cmu_i%5C%20%5C%20R/%28K_i&plus;R%29-M_i%5C%20%29)
+![3rd eq](https://latex.codecogs.com/gif.latex?%28dN_i%29/dt%3DN_i%5C%20%28%5Cmu_i%5C%20%5C%20R/%28K_i&plus;R%29-M_i%5C%20%29) . (3)
 
+<img src="https://github.com/Babakjfard/ED/blob/master/eq_04.png" width="300"> (4)
