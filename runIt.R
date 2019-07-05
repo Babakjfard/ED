@@ -4,6 +4,7 @@
 #setMKLthreads(4)
 library(deSolve)
 
+# Loads the main computation engine
 source("analysis.R")
 
 args <- commandArgs()
@@ -15,7 +16,7 @@ if (length(args)==0){
   args[2] = "params.csv"
 }
 
-
+# Loading the modeled food web
 load(paste0("Input/",args[1]))
 par <- read.csv(args[2], header=TRUE)
 load("Init_B.rda")
@@ -72,7 +73,8 @@ for (i in 1:length(d)){
     parms$d <- d[i]
     temp.abund <- list()
     for (j in 1:nreps){
-        temp.abund[[j]] <- ode(y=initials, func=solve.model, times=0:max.time, parms=parms)
+      # Solving the Ordinary Differential Equation defined by solve.model function  
+      temp.abund[[j]] <- ode(y=initials, func=solve.model, times=0:max.time, parms=parms)
          
     
     }
