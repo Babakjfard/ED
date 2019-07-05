@@ -73,6 +73,7 @@ remove.disconnected <- function(adj) {
 #----------------------------------------------------------
 
 # Code from lab-5 Solutions
+# Finds the neighboring patches of food webs and creates the connection matrix
 find.neighs <- function(npops) {
     neighs.abs <- matrix(nrow = npops, ncol = 3)
     neighs.abs[, 1] <- 1:npops
