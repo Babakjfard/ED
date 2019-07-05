@@ -12,3 +12,7 @@ The system also includes basal species which compete for one resource. The compe
 ![3rd eq](https://latex.codecogs.com/gif.latex?%28dN_i%29/dt%3DN_i%5C%20%28%5Cmu_i%5C%20%5C%20R/%28K_i&plus;R%29-M_i%5C%20%29) . (3)
 
 <img src="https://github.com/Babakjfard/ED/blob/master/eq_04.png" width="300"> (4)
+
+The metacommunity model is then used to model the regional level of interactions, which are represented by dispersals between the neighboring food webs as patches for dispersal model. Figure 1 depicts a simple model with two food webs and their resources, which are governed by dispersal rules as follow:
+
+
