@@ -18,5 +18,5 @@ The metacommunity model is then used to model the regional level of interactions
 <img src="https://github.com/Babakjfard/ED/blob/master/eq_5_6.png" width="350">
 
 <p align="center">
-  <img />
+  <img src="https://github.com/Babakjfard/ED/blob/master/Fig_1.png" width="600">
 </p>
